@@ -29,6 +29,7 @@ print("")
 print(filesWithComment , "/" , totalfiles)
 
 if(filesWithComment != totalfiles):
-    print("FAIL: Found files that do not contain 'Vidur Ratna 1309874' as a comment", file=sys.stderr)
+    # print("FAIL: Found files that do not contain 'Vidur Ratna 1309874' as a comment", file=sys.stderr)
+    raise Exception("FAIL: Found files that do not contain 'Vidur Ratna 1309874' as a comment")
 else:
     print("PASS")
