@@ -1,3 +1,4 @@
+// Vidur Ratna 1309874
 import React, { Component } from "react";
 import { CategoryNavBar } from "./categoryNavBar/CategoryNavBar";
 import { SearchBar } from "../search/searchBar/SearchBar";

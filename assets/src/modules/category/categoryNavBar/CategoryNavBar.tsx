@@ -1,3 +1,4 @@
+// Vidur Ratna 1309874
 import React from "react";
 import { categories } from "./categories";
 import "./categories.css"

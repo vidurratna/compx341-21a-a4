@@ -1,3 +1,4 @@
+// Vidur Ratna 1309874
 import { API } from 'aws-amplify';
 import React from 'react';
 import { FriendThumb } from './FriendThumb';
