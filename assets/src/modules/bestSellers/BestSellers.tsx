@@ -10,7 +10,7 @@ interface BestSellersProps {}
 
 interface BestSellersState {
   isLoading: boolean;
-  books: { bookId: any; }[];
+  books: { id: any; }[];
 }
 
 export default class BestSellers extends React.Component<BestSellersProps, BestSellersState> {
@@ -25,18 +25,43 @@ export default class BestSellers extends React.Component<BestSellersProps, BestS
 
   async componentDidMount() {
     try {
-      const books = [];
-      const bestSellers = await API.get("bestsellers", "/bestsellers", null);
       
-      // Map the elasticache results to a book object
-      for (var i = 0; i < bestSellers.length; i++) {
-        var hit = JSON.parse(bestSellers[i]);
-        books.push({ bookId: hit });
-      }
-      this.setState({
-        books: books,
-        isLoading: false
-      });
+      await API.get("bestsellers", "/bestsellers", null)
+               .then((listOfIDs) => {
+
+                  const bookIDList = [];
+
+                  for (var i = 0; i < listOfIDs.length; i++) {
+                    var hit = JSON.parse(listOfIDs[i]);
+                    bookIDList.push({ bookId: hit });
+                  }
+
+                  return bookIDList
+               })
+               .then(async (jsonBookIDs) => {
+
+                  const jsonBookPromises: any[] = [];
+                  // start collecting promises
+                  jsonBookIDs.map((book) => {
+                    const bookObject = API.get("books",`/books/${book.bookId}`, null);
+                    jsonBookPromises.push(bookObject)
+                  })
+                  // wait for all promises to come back.
+                  const allBookObjects = await Promise.all(jsonBookPromises);
+
+                  return allBookObjects
+               })
+               .then((listOfBooks) => {
+                 const sortedListOfBooks = listOfBooks.sort((a,b) => {
+                   return b.rating - a.rating
+                 })
+
+                 this.setState({
+                    books: sortedListOfBooks,
+                    isLoading: false
+                  });
+               })
+
     } catch(error) {
       alert(error);
     }
@@ -53,7 +78,7 @@ export default class BestSellers extends React.Component<BestSellersProps, BestS
               <h3>Top 20 best sellers</h3>
             </div>
             {this.state.isLoading ? <div className="loader" /> :
-              this.state.books.slice(0,20).map(book => <BestSellerProductRow bookId={book.bookId} key={book.bookId} />
+              this.state.books.slice(0,20).map(book => <BestSellerProductRow bookId={book.id} key={book.id} />
             )}  
           </div>
         </div>
