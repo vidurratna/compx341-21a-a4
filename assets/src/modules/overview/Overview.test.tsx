@@ -60,7 +60,7 @@ it('Check if the book overview displays the correct infomation in enough amount 
         <Overview match={{params:{id:bookID}}}/> 
     )
 
-    await new Promise((r)=> setTimeout(r, 1000)) // I will wait 2 seconds
+    await new Promise((r)=> setTimeout(r, 2000)) // I will wait 2 seconds
 
     const searchQ = getByText('3140', {exact: false});
 
