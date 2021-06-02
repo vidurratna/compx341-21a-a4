@@ -52,7 +52,7 @@ export default class Overview extends Component<OverviewProps, OverviewState> {
               {this.state.isLoading ? <div className="loader" />:
                 <div className="well-bs no-radius">
                     <div className="container-category">
-                        <h3>{this.state.book.name}</h3>
+                        <h3>Learn more about this book!</h3>
                     </div>
                     <div>
                         <div>
