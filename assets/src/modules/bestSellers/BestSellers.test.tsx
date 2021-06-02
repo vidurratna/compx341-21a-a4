@@ -75,7 +75,7 @@ it('Check if the Best Sellers sort in rating order', async () => {
     const allBookObjects = await Promise.all(jsonBookPromises);
 
     const sortedListOfBooks = allBookObjects.sort((a,b) => {
-        return a.rating - b.rating
+        return b.rating - a.rating
     })
 
     ReactDOM.render(
