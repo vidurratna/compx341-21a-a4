@@ -6,6 +6,7 @@ import AddToCart from "../../common/AddToCart";
 import FriendRecommendations from "../../common/friendRecommendations/FriendRecommendations";
 import StarRating from "../../common/starRating/StarRating";
 import "../../common/styles/productRow.css";
+import { Link } from "react-router-dom";
 
 interface ProductRowProps {
   bookId: string;
@@ -54,7 +55,9 @@ export class ProductRow extends React.Component<ProductRowProps, ProductRowState
       <div className="white-box">
         <div className="media">
           <div className="media-left media-middle no-padding">
-            <img className="media-object product-thumb" src={this.state.book.cover} alt={`${this.state.book.name} cover`} />
+            <Link to={"/book/"+this.props.bookId}>
+              <img className="media-object product-thumb" src={this.state.book.cover} alt={`${this.state.book.name} cover`} />
+            </Link>
           </div>
           <div className="media-body product-padding padding-20">
             <h3 className="media-heading">{this.state.book.name}

@@ -53,15 +53,15 @@ Amplify.configure({
 it('Check if the book overview displays the correct infomation in enough amount of time.', async ()=> {
     await Auth.signIn('vth98048@zwoho.com', 'password123');
 
-    const bookID = ""
+    const bookID = "0vld6p1u-d93b-11e8-9f8b-f2801f1b9fd1"
 
     const {getByText} = render(
-        <Overview /> //match={{params:{id:bookID}}}
+        <Overview match={{params:{id:bookID}}}/> 
     )
 
     await new Promise((r)=> setTimeout(r, 2000)) // I will wait 2 seconds
 
-    const searchQ = getByText('Brady Fisher', {exact: false});
+    const searchQ = getByText('3140', {exact: false});
 
     expect(searchQ).not.toBeNull();
 })
