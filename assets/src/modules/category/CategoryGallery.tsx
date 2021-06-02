@@ -37,10 +37,6 @@ export class CategoryGallery extends React.Component<CategoryGalleryProps, Categ
                                   return 0;
                                 })
                               })
-
-
-
-
       this.setState({ books });
     } catch (e) {
       alert(e);
